@@ -6,7 +6,7 @@ TOPIC_MAPPING = {
     2: "входные испытания",
     3: "учебный план и дисциплины",
     4: "стажировки",
-    5: "другое"
+    5: "другое",
 }
 router_runnable = RunnableLambda(router)
 

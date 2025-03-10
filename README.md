@@ -79,3 +79,9 @@ uv run src/app.py
 uv run pytest
 ```
 
+### Запуск форматтера и линтера
+
+```bash
+uv run ruff format src/router.py
+uv run ruff check --fix src/router.py
+```

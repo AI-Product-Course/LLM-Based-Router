@@ -1,0 +1,44 @@
+name: Grading
+
+on:
+  pull_request:
+    paths:
+      - 'src/**'
+    branches: [ "master", "main" ]
+
+  workflow_dispatch:
+
+jobs:
+  grading:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.11'
+
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          version: "0.6.5"
+          enable-cache: true
+          cache-dependency-glob: pyproject.toml
+
+      - name: Installing dependencies
+        run: |
+          uv sync
+
+      - name: Run autotests
+        run: |
+          PYTHONIOENCODING=utf-8 uv run pytest tests > autotests.log 2>&1 || true
+
+      - name: Run linters
+        run: |
+          PYTHONIOENCODING=utf-8 uv run ruff check src/router.py > linters.log 2>&1
+
+      - name: Send data to grading system
+        run: |
+          cd .grading && uv run run.py
