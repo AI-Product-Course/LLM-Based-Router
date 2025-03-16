@@ -1,0 +1,37 @@
+[project]
+name = "llm-based-router"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "langchain>=0.3.20",
+    "pytest>=8.3.5",
+    "ruff>=0.9.10",
+]
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+lint.select = [
+    "ALL",
+]
+lint.ignore = [
+    "D",
+    "COM812",
+    "FBT001",
+    "RUF001",
+    "PLR0913",
+    "TC002",
+    "TRY003",
+    "EM101",
+    "DTZ005",
+    "TC001",
+    "FAST002"
+]
+lint.fixable = [
+    "F401", # delete unused imports
+    "I001", # sort imports
+    "W292", # newline at end of file
+    "RUF022", # sort __all__ list
+]
