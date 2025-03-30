@@ -5,5 +5,5 @@ Topic = Literal[1, 2, 3, 4, 5]
 
 
 def router(query: str) -> Topic:
-    result = random.randint(1, 5)
+    result = 1
     return cast(Topic, result)
