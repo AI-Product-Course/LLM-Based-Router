@@ -7,6 +7,7 @@ import requests
 
 
 GRADING_SERVER = os.environ["GRADING_SERVER"] # http://localhost:8000
+GITHUB_PULL_REQUEST_NUMBER = os.environ["PULL_REQUEST_NUMBER"] # 1
 GITHUB_REPOSITORY_FROM_GITHUB_ACTION = os.environ["GITHUB_REPOSITORY"] # Daniil-Solo/LLM-Based-Router/
 GITHUB_OWNER, GITHUB_REPOSITORY, _ = GITHUB_REPOSITORY_FROM_GITHUB_ACTION.split("/")
 SUBMISSION_URL = GRADING_SERVER + "/api/submissions"
@@ -66,7 +67,8 @@ if __name__ == "__main__":
 
     headers = {
         "X-GitHub-Owner": GITHUB_OWNER,
-        "X-GitHub-Repository": GITHUB_REPOSITORY
+        "X-GitHub-Repository": GITHUB_REPOSITORY,
+        "X-GitHub-Pull-Request-Number": GITHUB_PULL_REQUEST_NUMBER,
     }
 
     response = requests.post(SUBMISSION_URL, files=files, headers=headers)

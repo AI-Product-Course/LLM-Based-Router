@@ -8,6 +8,10 @@ on:
 
   workflow_dispatch:
 
+env:
+  GRADING_SERVER: 'значение'
+  PULL_REQUEST_NUMBER: ${{ github.event.pull_request.number }}
+
 jobs:
   grading:
     runs-on: ubuntu-24.04
@@ -37,7 +41,7 @@ jobs:
 
       - name: Run linters
         run: |
-          PYTHONIOENCODING=utf-8 uv run ruff check src/router.py > linters.log 2>&1
+          PYTHONIOENCODING=utf-8 uv run ruff check src/router.py > linters.log 2>&1 || true
 
       - name: Send data to grading system
         run: |
